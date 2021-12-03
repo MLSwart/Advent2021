@@ -49,10 +49,12 @@ public class Diagnostic2 {
                     x++;
                 }
             }
+
+            readings = bewaarRij;
             numberOfOnes = 0;
             numberOfZeros = 0;
             charAtNumber++;
-            if (charAtNumber > 11) {
+            if (bewaarRijLengte==1) {
                 einde = true;
             }
         }
