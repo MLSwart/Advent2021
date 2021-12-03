@@ -8,8 +8,8 @@ public class Diagnostic1 {
         int numberOfOnes = 0;
         int charAtNumber = 0;
         boolean einde = false;
-        int[] gamma= new int[12];
-        int[] epsilon= new int[12];
+        int[] gamma = new int[12];
+        int[] epsilon = new int[12];
         while (!einde) {
             for (int i = 0; i < readings.length; i++) {
                 char firstNumber = readings[i].charAt(charAtNumber);
@@ -23,13 +23,11 @@ public class Diagnostic1 {
             }
 
             if (numberOfZeros > numberOfOnes) {
-                System.out.print("0");
-                gamma[charAtNumber]=0;
-                epsilon[charAtNumber]=1;
+                gamma[charAtNumber] = 0;
+                epsilon[charAtNumber] = 1;
             } else if (numberOfOnes > numberOfZeros) {
-                System.out.print("1");
-                gamma[charAtNumber]=0;
-                epsilon[charAtNumber]=1;
+                gamma[charAtNumber] = 1;
+                epsilon[charAtNumber] = 0;
             } else if (numberOfOnes == numberOfZeros) {
                 System.out.print("X");
             } else {
@@ -43,8 +41,17 @@ public class Diagnostic1 {
             }
         }
 
+        for (int x = 0; x < 12; x++) {
+            System.out.print(gamma[x]);
+        }
+
+        System.out.println(" ");
+
+        for (int y = 0; y < 12; y++) {
+            System.out.print(epsilon[y]);
+        }
+
+
 
     }
-
-
 }
