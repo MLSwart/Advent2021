@@ -10,6 +10,9 @@ public class Diagnostic1 {
         boolean einde = false;
         int[] gamma = new int[12];
         int[] epsilon = new int[12];
+        int a = 2;
+        int binary[] = {1, a, (int) Math.pow(a, 2), (int) Math.pow(a, 3), (int) Math.pow(a, 4), (int) Math.pow(a, 5), (int) Math.pow(a, 6), (int) Math.pow(a, 7), (int) Math.pow(a, 8), (int) Math.pow(a, 9), (int) Math.pow(a, 10), (int) Math.pow(a, 11)};
+
         while (!einde) {
             for (int i = 0; i < readings.length; i++) {
                 char firstNumber = readings[i].charAt(charAtNumber);
@@ -41,17 +44,22 @@ public class Diagnostic1 {
             }
         }
 
+        int decimalGammaValue = 0;
         for (int x = 0; x < 12; x++) {
-            System.out.print(gamma[x]);
+            decimalGammaValue = decimalGammaValue + (gamma[x] * binary[11 - x]);
+        }
+        int decimalEpsilonValue = 0;
+        for (int q = 0; q < 12; q++) {
+            decimalEpsilonValue = decimalEpsilonValue + (epsilon[q] * binary[11 - q]);
         }
 
-        System.out.println(" ");
+        System.out.println("Gamma: " + decimalGammaValue);
 
-        for (int y = 0; y < 12; y++) {
-            System.out.print(epsilon[y]);
-        }
+        System.out.println("Epsilon: " + decimalEpsilonValue);
 
+        System.out.println("Vermenigvuldigd: " + (decimalGammaValue * decimalEpsilonValue));
 
 
     }
 }
+//4,8,16,32,64,128,256,514,
