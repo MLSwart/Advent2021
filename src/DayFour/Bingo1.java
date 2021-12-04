@@ -2,11 +2,22 @@ package DayFour;
 
 public class Bingo1 {
     public static void main(String[] args) {
-        arrayChecks arrayChecks = new arrayChecks();
-
-        arrayChecks.vervangDoorNull();
+        Bingo1 arrayChecks = new Bingo1();
+        boolean doneAlready = false;
+        for (int x = 0; x < 12; x++) {
+            arrayChecks.vervangDoorNull();
+            arrayChecks.printArrays();
+            if (!arrayChecks.alEenRijVolX()) {
+                System.out.println("Nog niet.");
+            }
+            if (arrayChecks.alEenRijVolX()) {
+                System.out.println("Bingo!");
+            }
+        }
 
     }
+
+
     int[][][] boards = {{{22, 13, 17, 11, 0},
             {8, 2, 23, 4, 24},
             {21, 9, 14, 16, 7},
@@ -28,32 +39,70 @@ public class Bingo1 {
 
     int[] getrokkenGetallen = {7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1};
 
+    int d = 0;
 
+    public void vervangDoorNull() {
+        for (int a = 0; a < 3; a++) {
+            for (int b = 0; b < 5; b++) {
+                for (int c = 0; c < 5; c++) {
+                    if (boards[a][b][c] == getrokkenGetallen[d]) {
+                        boards[a][b][c] = -1;
+                        this.boards[a][b][c]=boards[a][b][c];
 
-    public class arrayChecks {
-        public void vervangDoorNull() {
-            int d = 0;
-            for (int a = 0; a < 3; a++) {
-                for (int b = 0; b < 5; b++) {
-                    for (int c = 0; c < 5; c++) {
-                        if (boards[a][b][c] == getrokkenGetallen[d]) {
-                            boards[a][b][c] = Integer.parseInt(null);
-
-                        }
                     }
                 }
             }
         }
-
-        public boolean alEenRijVolX() {
-            return false;
+        if (d < 26) {
+            System.out.println(getrokkenGetallen[d]);
+            System.out.println(" ");
+            d++;
         }
 
-        public boolean alEenKolomVolX() {
-            return false;
+    }
+
+    public boolean alEenRijVolX() {
+        boolean bingoFound=false;
+        for (int a = 0; a < 3; a++) {
+            for (int b = 0; b < 5; b++) {
+                for (int c = 0; c < 5; c++) {
+                    int teller = 0;
+                    if (boards[a][b][c] == -1){
+                        teller++;
+                    }
+                    if(teller==5){
+                        bingoFound=true;
+                    }
+
+                }
+            }
+        }
+        if (bingoFound) {return true;
+        }
+        else return false;
+    }
+
+
+    public boolean alEenKolomVolX() {
+        return false;
+    }
+
+    public void printArrays() {
+        for (int a = 0; a < 3; a++) {
+            boolean done = false;
+            for (int b = 0; b < 5; b++) {
+                for (int c = 0; c < 5; c++) {
+                    System.out.print(boards[a][b][c]);
+                    System.out.print(" ");
+                }
+                System.out.println("");
+            }
+            System.out.println("");
         }
     }
 }
+
+
 
 
 /*Dus ik heb een functie nodig die controleert of een getal voorkomt in de arrays. (Nee? Opnieuw met volgende getal).
