@@ -20,7 +20,8 @@ public class Bingo2 {
                 vervangDoorNull(x,boards[z]);
                 if (alEenRijVolX(boards[z]) || alEenKolomVolX(boards[z])) {
                     winnaars++;
-                } else laatstebord = z;
+                } else {laatstebord = z;
+                printArrays(boards[z]);}
             }
             System.out.println(winnaars);
             if (winnaars == (boards.length)) {
@@ -655,11 +656,11 @@ public class Bingo2 {
     }
 
 
-    public boolean alEenRijVolX(int[][] boards) {
+    public boolean alEenRijVolX(int[][] board) {
         for (int b = 0; b < 5; b++) {
             int teller = 0;
             for (int c = 0; c < 5; c++) {
-                if (boards[b][c] == -1) {
+                if (board[b][c] == -1) {
                     teller++;
                 }
             }
