@@ -15,9 +15,9 @@ public class HydrothermalVenture2 {
         maximumYValue(input);
         int[][] mapArray = new int[maximumXValue(input) + 1][maximumYValue(input) + 1];
 
-        //for (int x = 0; x < input.length; x++) {
-        //    rechteLijn(input[x], mapArray);
-        // }
+        for (int x = 0; x < input.length; x++) {
+            rechteLijn(input[x], mapArray);
+        }
         for (int i = 0; i < input.length; i++) {
             diagonaleLijnen(input[i], mapArray);
         }
@@ -118,7 +118,7 @@ public class HydrothermalVenture2 {
 
         if (abs(verschilX1) == abs(verschilY1) || abs(verschilX2) == abs(verschilY2)) {
             //diagonaal gevonden;
-            if (abs(verschilX1) == abs(verschilY1)) {
+            if ((verschilX1) == (verschilY1)) {
                 //geval 1 of 4
                 if (setjeWaarden[0] < setjeWaarden[2]) //dus x wordt groter
                 {//geval 4. Twijfel. Welke setjeWaarden[?]
@@ -142,14 +142,14 @@ public class HydrothermalVenture2 {
 
 
     public void fillUpLeftwardDiagonal(int x, int y1, int y2, int[][] array) {
-        //geval 1: dx=-, dy=-
+        //geval 1: dx=-, dy=- (NW)
         for (int q = x; q >= y2; q--) {
             array[x][q]++;
         }
     }
 
     public void fillUpRightwardDiagonal(int x, int y1, int y2, int[][] array) {
-        //geval 2: dx=+, dy=-
+        //geval 2: dx=+, dy=- (NE)
         for (int q = y2; q >= y1; q--) {
             array[x][q]++;
             x++;
@@ -157,7 +157,7 @@ public class HydrothermalVenture2 {
     }
 
     public void fillDownLeftwardDiagonal(int x, int y1, int y2, int[][] array) {
-        //geval 3: dx-, dy+
+        //geval 3: dx-, dy+ (SW)
         for (int q = y1; q <= y2; q++) {
             array[q][x]++;
             x--;
@@ -165,7 +165,7 @@ public class HydrothermalVenture2 {
     }
 
     public void fillDownRightwardDiagonal(int x, int y1, int y2, int[][] array) {
-        //geval 4: dx+, dy+
+        //geval 4: dx+, dy+ (SE)
         for (int q = y1; q <= y2; q++) {
             array[x][q]++;
             x++;
