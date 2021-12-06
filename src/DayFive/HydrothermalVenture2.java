@@ -122,18 +122,18 @@ public class HydrothermalVenture2 {
                 //geval 1 of 4
                 if (setjeWaarden[0] < setjeWaarden[2]) //dus x wordt groter
                 {//geval 4. Twijfel. Welke setjeWaarden[?]
-                    fillDownRightwardDiagonal(setjeWaarden[0], setjeWaarden[2], setjeWaarden[3], mapArray);
+                    fillDownRightwardDiagonal(setjeWaarden[0], setjeWaarden[1], setjeWaarden[2], setjeWaarden[3], mapArray);
                 } else {//geval 1
-                    fillUpLeftwardDiagonal(setjeWaarden[0], setjeWaarden[2], setjeWaarden[3], mapArray);
+                    fillUpLeftwardDiagonal(setjeWaarden[0], setjeWaarden[1], setjeWaarden[2], setjeWaarden[3], mapArray);
                 }
             } else {
                 //geval 2 of 3
-                if (setjeWaarden[0] < setjeWaarden[3]) {//dus x wordt groter, y kleiner
+                if (setjeWaarden[1] < setjeWaarden[3]) {//dus x wordt groter, y kleiner
                     //geval 2
-                    fillUpRightwardDiagonal(setjeWaarden[0], setjeWaarden[2], setjeWaarden[3], mapArray);
+                    fillUpRightwardDiagonal(setjeWaarden[0], setjeWaarden[2],setjeWaarden[1], setjeWaarden[3], mapArray);
                 } else {
                     //geval 3
-                    fillDownLeftwardDiagonal(setjeWaarden[0], setjeWaarden[2], setjeWaarden[3], mapArray);
+                    fillDownLeftwardDiagonal(setjeWaarden[0], setjeWaarden[2], setjeWaarden[1], setjeWaarden[3], mapArray);
 
                 }
             }
@@ -141,34 +141,35 @@ public class HydrothermalVenture2 {
     }
 
 
-    public void fillUpLeftwardDiagonal(int x, int y1, int y2, int[][] array) {
+    public void fillUpLeftwardDiagonal(int x1, int x2, int y1, int y2, int[][] array) {
         //geval 1: dx=-, dy=- (NW)
-        for (int q = x; q >= y2; q--) {
-            array[x][q]++;
+        for (int q = x1; q >= x2; q--) {
+            array[q][y2]++;
+            y2--;
         }
     }
 
-    public void fillUpRightwardDiagonal(int x, int y1, int y2, int[][] array) {
-        //geval 2: dx=+, dy=- (NE)
+    public void fillDownLeftwardDiagonal(int x1, int x2, int y1, int y2, int[][] array) {
+        //geval 2: dx=+, dy=- (SW)
         for (int q = y2; q >= y1; q--) {
-            array[x][q]++;
-            x++;
+            array[x1][q]++;
+            x2++;
         }
     }
 
-    public void fillDownLeftwardDiagonal(int x, int y1, int y2, int[][] array) {
-        //geval 3: dx-, dy+ (SW)
+    public void fillUpRightwardDiagonal(int x1, int x2, int y1, int y2, int[][] array) {
+        //geval 3: dx-, dy+ (NE)
         for (int q = y1; q <= y2; q++) {
-            array[q][x]++;
-            x--;
+            array[x1][q]++;
+            x1--;
         }
     }
 
-    public void fillDownRightwardDiagonal(int x, int y1, int y2, int[][] array) {
+    public void fillDownRightwardDiagonal(int x1, int x2, int y1, int y2, int[][] array) {
         //geval 4: dx+, dy+ (SE)
-        for (int q = y1; q <= y2; q++) {
-            array[x][q]++;
-            x++;
+        for (int q = x1; q <= y2; q++) {
+            array[x1][q]++;
+            x1++;
         }
     }
 
