@@ -6,3 +6,16 @@
 
 System.out.println("X-as rij " + setjeWaarden[i] + ", van y= " + eersteWaarde + " tot y= " + tweedeWaarde);
 System.out.println("Y-as rij " + setjeWaarden[i] + ", van x= " + eersteWaarde + " tot x= " + tweedeWaarde);
+
+ if (verschilX1 < 0) {
+            int verschilXGeenRichting = verschilX1 * -1;
+        }
+        if (verschilX2 < 0) {
+            verschilX2 = verschilX1 * -1;
+        }
+        if (verschilY1 < 0) {
+            verschilY1 = verschilY1 * -1;
+        }
+        if (verschilY2 < 0) {
+            verschilY2 = verschilY2 * -1;
+        }
