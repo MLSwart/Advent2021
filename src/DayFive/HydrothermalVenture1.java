@@ -1,30 +1,48 @@
 package DayFive;
 
-public class HydrothermalVenture1 {
-    public static void main(String[] args) {
-        HydrothermalVenture1 hydrothermalVenture1 = new HydrothermalVenture1();
-        hydrothermalVenture1.maximumXValue(hydrothermalVenture1.input);
-        hydrothermalVenture1.maximumYValue(hydrothermalVenture1.input);
-        System.out.println(hydrothermalVenture1.maximumXValue(hydrothermalVenture1.input) + " , " + hydrothermalVenture1.maximumYValue(hydrothermalVenture1.input));
-        hydrothermalVenture1.isRechteLijn(hydrothermalVenture1.input);
+import java.util.Arrays;
 
+public class HydrothermalVenture1 {
+    int[][] input = {{0, 9, 5, 9}, {8, 0, 0, 8}, {9, 4, 3, 4}, {2, 2, 2, 1}, {7, 0, 7, 4}, {6, 4, 2, 0}, {0, 9, 2, 9}, {3, 4, 1, 4}, {0, 0, 8, 8}, {5, 5, 8, 2}};
+
+    public static void main(String[] args) {
+        HydrothermalVenture1 vent = new HydrothermalVenture1();
+        vent.run();
     }
 
-    int[][] input = {{0, 9, 5, 9}, {8, 0, 0, 8}, {9, 4, 3, 4}, {2, 2, 2, 1}, {7, 0, 7, 4}, {6, 4, 2, 0}, {0, 9, 2, 9}, {3, 4, 1, 4}, {0, 0, 8, 8}, {5, 5, 8, 2}};
-    //int[][] mapArray = new int[][];
+    void run() {
+        maximumXValue(input);
+        maximumYValue(input);
+        int[][] mapArray = new int[maximumXValue(input)][maximumYValue(input)];
+
+        for (int x = 0; x < input.length; x++) {
+            isRechteLijn(input[x], mapArray);
+        }
+        int crossings = 0;
+        for (int i = 0; i < maximumXValue(input); i++) {
+            for (int k = 0; k < maximumYValue(input); k++) {
+                if (mapArray[i][k] == 2) {
+                    crossings++;
+                }
+
+            }
+        }
+        System.out.println(crossings);
+    }
+
 
     public int maximumXValue(int[][] setjeWaarden) {
         int hoogsteXWaarde = 0;
-        int hoogsteVanTwee = 0;
-        for (int i = 0; i < input.length; i++) {
+
+        for (int i = 0; i < setjeWaarden.length; i++) {
 
             if (setjeWaarden[i][0] > setjeWaarden[i][2]) {
-                hoogsteVanTwee = setjeWaarden[i][0];
+                int hoogsteVanTwee = setjeWaarden[i][0];
                 if (hoogsteVanTwee > hoogsteXWaarde) {
                     hoogsteXWaarde = hoogsteVanTwee;
                 }
             } else {
-                hoogsteVanTwee = setjeWaarden[i][2];
+                int hoogsteVanTwee = setjeWaarden[i][2];
                 if (hoogsteVanTwee > hoogsteXWaarde) {
                     hoogsteXWaarde = hoogsteVanTwee;
                 }
@@ -36,7 +54,7 @@ public class HydrothermalVenture1 {
     public int maximumYValue(int[][] setjeWaarden) {
         int hoogsteYWaarde = 0;
         int hoogsteVanTwee = 0;
-        for (int i = 0; i < input.length; i++) {
+        for (int i = 0; i < setjeWaarden.length; i++) {
 
             if (setjeWaarden[i][1] > setjeWaarden[i][3]) {
                 hoogsteVanTwee = setjeWaarden[i][1];
@@ -53,19 +71,53 @@ public class HydrothermalVenture1 {
         return hoogsteYWaarde;
     }
 
-    public boolean isRechteLijn(int[][] setjeWaarden) {
-        for (int i = 0; i < input.length; i++) {
-            //(i is hier het nummer van het array)
-            if (setjeWaarden[i][0] == setjeWaarden[i][2]) {
-                return true;
-            } else if (setjeWaarden[i][1] == setjeWaarden[i][3]) {
+    public boolean isRechteLijn(int[] setjeWaarden, int[][] mapArray) {
+        for (int i = 0; i < 2; i++) {
+            if (setjeWaarden[i] == setjeWaarden[i + 2]) {
+                {
+                    if (i == 0) {
+                        int eersteWaarde = setjeWaarden[i + 1];
+                        int tweedeWaarde = setjeWaarden[i + 3];
+                        if (eersteWaarde > tweedeWaarde) {
+                            eersteWaarde = setjeWaarden[i + 3];
+                            tweedeWaarde = setjeWaarden[i + 1];
+
+                        }
+                        fillHorizontal(setjeWaarden[i], eersteWaarde, tweedeWaarde, mapArray);
+
+                    } else {
+                        int eersteWaarde = setjeWaarden[i - 1];
+                        int tweedeWaarde = setjeWaarden[i + 1];
+                        if (eersteWaarde > tweedeWaarde) {
+                            eersteWaarde = setjeWaarden[i + 1];
+                            tweedeWaarde = setjeWaarden[i - 1];
+                        }
+                        fillVertical(setjeWaarden[i], eersteWaarde, tweedeWaarde, mapArray);
+
+                    }
+                }
                 return true;
             }
         }
         return false;
-        //ik denk dat deze method nu kijkt of er ergens een rechte lijn is. Dat wil ik niet: ik wil weten welke items in het array een rechte lijn zijn.
+    }
+
+    public void fillHorizontal(int x, int y1, int y2, int[][] array) {
+        for (int q = y1; q < y2; q++) {
+            array[x][q]++;
+        }
+
+
+    }
+
+    public void fillVertical(int y, int x1, int x2, int[][] array) {
+        for (int q = x1; q < x2; q++) {
+            array[y][q]++;
+        }
+
     }
 }
+
 
 
 
