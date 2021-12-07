@@ -16,8 +16,8 @@ public class Lanternfish1 {
         int cat6 = 0;
         int cat7 = 0;
         int cat8 = 0;
-        int input[] = {3, 4, 3, 1, 2};
-        int numberOfDays = 18;
+        int input[] = {3,4,3,1,2};
+        int numberOfDays = 80;
         Lanternfish1 fish2 = new Lanternfish1();
 
 
@@ -63,8 +63,23 @@ public class Lanternfish1 {
 
         System.out.println(cat0 + " , " + cat1 + " , " + cat2 + " , " + cat3 + " , " + cat4 + " , " + cat5 + " , " + cat6 + " , " + cat7 + " , " + cat8);
         for(int i=0; i<numberOfDays; i++){
-            fish2.moveFish(cat0, cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8);
+            int catReserve = 0;
+            catReserve = cat0;
+            cat0 = cat1;
+            cat1 = cat2;
+            cat2 = cat3;
+            cat3 = cat4;
+            cat4 = cat5;
+            cat5 = cat6;
+            cat6 = cat7 + catReserve;
+            cat7 = cat8;
+            cat8 = catReserve;
+
+            int numberOfFish = cat0 + cat1 + cat2 + cat3 + cat4 + cat5 + cat6 + cat7 + cat8;
+            System.out.println(numberOfFish);
+
         }
+
 
 
 
@@ -120,7 +135,7 @@ public class Lanternfish1 {
 
      */
 
-    public void moveFish(int cat0, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6, int cat7, int cat8) {
+   /* public void moveFish(int cat0, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6, int cat7, int cat8) {
         int catReserve = 0;
         catReserve = cat0;
         cat0 = cat1;
@@ -137,6 +152,8 @@ public class Lanternfish1 {
         System.out.println(numberOfFish);
 
     }
+
+    */
 
     public void fishCount(int cat0, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6, int cat7, int cat8) {
         int numberOfFish = cat0 + cat1 + cat2 + cat3 + cat4 + cat5 + cat6 + cat7 + cat8;
