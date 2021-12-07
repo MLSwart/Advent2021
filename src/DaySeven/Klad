@@ -1,0 +1,65 @@
+public void crabSorter(int[] crabPositions) {
+        for (int i = 0; i < crabPositions.length; i++) {
+            if(crabPositions[i]>crabPositions[i+1]){
+
+
+            }
+
+        }
+
+    }
+
+    public void positionCounter() {
+
+
+    }
+
+    public void uniquePositions(int[] crabPositions){
+
+
+    };
+
+
+    public void maxPosition(int[] crabPositions) {
+
+    }
+
+    public void mean(int[] crabPositions) {
+
+            }
+
+
+        }
+
+
+    }
+
+    public void median(int[] crabPositions) {
+        for (int i = 0; i < crabPositions.length; i++) {
+        }
+    }
+
+    public void average(int[] crabPositions) {
+        for (int i = 0; i < crabPositions.length; i++) {
+        }
+    }
+}
+
+{
+        int arrayNumber=0;
+        for(int x=arrayNumber; x<crabPositions.length; x++){
+            if (!uniquePositions.contains(crabPositions[arrayNumber])){
+                uniquePositions.add(crabPositions[arrayNumber]);}
+
+        }
+        System.out.println(uniquePositions);
+
+
+    }
+
+/*
+-Sorteer de krabben op positie
+-(Hoeveel unieke posities zijn er?)
+-Wat is de mean, mediaan, het gemiddelde?
+-
+ */
