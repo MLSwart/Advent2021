@@ -211,3 +211,37 @@
 "gdefbac dgfecb afdg gcfbad gcd ecabg gd afcdb bfdcea gdcab" , "acdgb dg dcg dafg" , 
 "bcaefd aceb dagecf ea cgebafd eda ebgdf faedb dbafc bgdcaf" , "facbdg aecb aebc gdefb" , 
 "cafdeg egcfb ge afedcb egba acgfbe cebadfg gbfdc baefc egc" , "ebga ge ecg aecfb"
+
+
+
+
+ public void determineEasyNumbers(String[] cleanInputKeys) {
+        for (int i = 0; i < cleanInputKeys.length; i++) {
+            String[] split = cleanInputKeys[i].split(" ");
+            for (int j = 0; j < split.length; j++) {
+                int entryLength = split[j].length();
+                if (entryLength == 2) {
+                    System.out.println("serie nummer " + (i + 1) + ", 1 = " + split[j]);
+                }
+                if (entryLength == 4) {
+                    System.out.println("serie nummer " + (i + 1) + ", 4 = " + split[j]);
+                }
+                if (entryLength == 3) {
+                    System.out.println("serie nummer " + (i + 1) + ", 7 = " + split[j]);
+
+                }
+
+                if (entryLength == 7) {
+                    System.out.println("serie nummer " + (i + 1) + ", 8 = " + split[j]);
+                }
+
+
+            }
+
+            System.out.println(" +++ +++ +++");
+
+        }
+    }
+
+
+

@@ -5,8 +5,17 @@ import java.util.Arrays;
 public class SevenSegment2 {
     public static void main(String[] args) {
         SevenSegment2 sevenSegment = new SevenSegment2();
-        sevenSegment.getCleanInput(sevenSegment.rawInput);
-        sevenSegment.determineEasyNumbers(sevenSegment.cleanInput);
+        sevenSegment.getCleanInputKeys(sevenSegment.rawInput);
+        sevenSegment.determineLetterDistribution(sevenSegment.cleanInputKeys);
+        sevenSegment.determineLetterDistribution(sevenSegment.cleanInputKeys);
+
+
+        /*
+        Neem inputKeys[1].
+        Zet deze code op alfabetische volgorde in een array.
+        is array.length 2, 3, 4 of 7? enz.
+
+         */
 
     }
 
@@ -21,48 +30,102 @@ public class SevenSegment2 {
             "egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg", "gbdfcae bgc cg cgb",
             "gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc", "fgae cfgab fg bagce"};
 
-    String[] cleanInput = new String[(rawInput.length) / 2];
+    String[] cleanInputKeys = new String[(rawInput.length) / 2];
+    String[] cleanInputCodes = new String[(rawInput.length) / 2];
 
-    public void getCleanInput(String[] rawInput) {
+    public void getCleanInputCodes(String[] rawInput) {
         int newPos = 0;
         for (int i = 1; i < rawInput.length; i = (i + 2)) {
-            cleanInput[newPos] = rawInput[i];
+            cleanInputCodes[newPos] = rawInput[i];
             newPos++;
         }
 
-       /* for (int k = 0; k < cleanInput.length; k++) {
-            char tempCleanInput[]= cleanInput[k].toCharArray();
-            Arrays.sort(tempCleanInput);
-            tempCleanInput.toString();
-            cleanInput[k]=tempCleanInput;
-        }
-
-        */
     }
 
-    public void determineEasyNumbers(String[] cleanInput) {
-        int counter = 0;
+    public void getCleanInputKeys(String[] rawInput) {
+        int newPos = 0;
+        for (int i = 0; i < rawInput.length; i = (i + 2)) {
+            cleanInputKeys[newPos] = rawInput[i];
+            newPos++;
+        }
+
+    }
+
+    public void alphabetize(String[] cleanInput) {
+        for (int k = 0; k < cleanInput.length; k++) {
+            String[] inputSplit = cleanInput[k].split(" ");
+            inputSplit.toString();
+            for (int m = 0; m < inputSplit.length; m++) {
+                String[] letterSplit = inputSplit[m].split("");
+                Arrays.sort(letterSplit);
+                letterSplit.toString();
+            }
+        }
+
+    }
+
+    public void determineLetterDistribution(String[] cleanInput) {
         for (int i = 0; i < cleanInput.length; i++) {
-            String[] split = cleanInput[i].split(" ");
-            for (int j = 0; j < split.length; j++) {
-                int entryLength = split[j].length();
-                if (entryLength == 2) {
-                    System.out.println("serie nummer " + (i + 1) + ", 1 is code " + split[j]);
-                }
-                if (entryLength == 3) {
-                    System.out.println("serie nummer " + (i + 1) + ", 7 is code " + split[j]);
+            String removeCommas = cleanInput[i].replace(" ", "");
+            String[] individualLetters = removeCommas.split("");
+            Arrays.sort(individualLetters);
+            int[] nums = new int[7];
+            for (int k = 0; k < individualLetters.length; k++) {
 
+                if (individualLetters[k] == "a") {
+                    nums[0]++;
                 }
-                if (entryLength == 4) {
-                    System.out.println("serie nummer " + (i + 1) + ", 4 is code " + split[j]);
+                if (individualLetters[k] == "b") {
+                    nums[1]++;
                 }
-                if (entryLength == 7) {
-                    System.out.println("serie nummer " + (i + 1) + ", 8 is code " + split[j]);
+                if (individualLetters[k] == "c") {
+                    nums[2]++;
                 }
-
+                if (individualLetters[k] == "d") {
+                    nums[3]++;
+                }
+                if (individualLetters[k] == "e") {
+                    nums[4]++;
+                }
+                if (individualLetters[k] == "f") {
+                    nums[5]++;
+                }
+                if (individualLetters[k] == "g") {
+                    nums[6]++;
+                }
 
             }
-
+            System.out.println("A's : " + nums[0]);
         }
+
+
     }
+
 }
+
+
+
+
+
+
+/*
+#7       3 segments
+#8       7 segments
+#1       2 segments
+#4       4 segments
+#3       5 segments, 2 in common with 1
+#2       5 segments, 3 in common with 4
+#5       5 segments, 2 in common with 4
+#9       6 segments, 4 in common with 4
+#6       6 segments, 1 in common with 1
+#0       6 segments, 3 in common with 4 and 2 in common with 1
+ */
+
+/*
+for (int k = 0; k < cleanInputKeys.length; k++) {
+            char tempcleanInputKeys[]= cleanInputKeys[k].toCharArray();
+            Arrays.sort(tempcleanInputKeys);
+            tempcleanInputKeys.toString();
+            cleanInputKeys[k]=tempcleanInputKeys;
+        }
+ */
