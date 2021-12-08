@@ -1,7 +1,5 @@
 package DaySeven;
 
-import java.util.Arrays;
-
 import static java.lang.Math.abs;
 
 public class Whales2 {
@@ -18,8 +16,8 @@ public class Whales2 {
 
     public int calculateFuel(int[] crabPositions, int testPosition) {
         int fuelCost = 0;
-        for (int j = 0; j < crabPositions.length; j++) {
-            int individualDistance = abs(crabPositions[j] - testPosition);
+        for (int crabPosition : crabPositions) {
+            int individualDistance = abs(crabPosition - testPosition);
             fuelCost = fuelCost + ((individualDistance * (individualDistance + 1)) / 2);
 
         }
