@@ -7,32 +7,32 @@ public class SevenSegment2 {
     public static void main(String[] args) {
         SevenSegment2 sevenSegment = new SevenSegment2();
         sevenSegment.getCleanInputKeys(sevenSegment.rawInput);
-        int[] distribution = sevenSegment.findDistribution(sevenSegment.cleanInputKeys[0]);
-        HashMap<String, String> sleutel = new HashMap<String, String>(); //de cijfers die we al weten. We moeten eigenlijk alleen de 4 weten om de rest te beredeneren.
-        for (int n = 0; n < sevenSegment.cleanInputCodes.length; n++) {
-            if (distribution[n].equals("ABCEFG")) {
-                sleutel.put("0");
-            }
-        }
+        int[] distribution = sevenSegment.findDistribution(sevenSegment.cleanInputKeys[1]);
+        //HashMap<String, String> sleutel = new HashMap<String, String>(); //de cijfers die we al weten. We moeten eigenlijk alleen de 4 weten om de rest te beredeneren.
+        //for (int n = 0; n < sevenSegment.cleanInputCodes.length; n++) {
+        //    if (distribution[n].equals("ABCEFG")) {
+        //        sleutel.put("0");
+        //    }
+        //}
 
         HashMap<Integer, String> findEasy = new HashMap<Integer, String>();
         findEasy.put(6, "B");
         findEasy.put(4, "E");
         findEasy.put(9, "F");
 
-        HashMap<Integer, String> findDifficult = new HashMap<Integer, String>();
-        for (int q = 0; q < 7; q++) {
-            if (distribution[q] == 7) {
-                if () {
-                    findDifficult.put(7, "D");
-                } else findDifficult.put(7, "G");
-            }
-            if (distribution[q] == 8) {
-                if () {
-                    findDifficult.put(8, "C");
-                } else findDifficult.put(8, "G");
-            }
-        }
+        //HashMap<Integer, String> findDifficult = new HashMap<Integer, String>();
+        //for (int q = 0; q < 7; q++) {
+        //    if (distribution[q] == 7) {
+        //        if () {
+        //            findDifficult.put(7, "D");
+        //        } else findDifficult.put(7, "G");
+        //    }
+        //    if (distribution[q] == 8) {
+        //        if () {
+        //            findDifficult.put(8, "C");
+        //        } else findDifficult.put(8, "G");
+        //    }
+        //}
 
 
         for (int x = 0; x < distribution.length; x++) {
