@@ -1,5 +1,6 @@
 package DayEight;
 
+import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -8,46 +9,16 @@ public class SevenSegment2 {
         SevenSegment2 sevenSegment = new SevenSegment2();
         sevenSegment.getCleanInputKeys(sevenSegment.rawInput);
         int[] distribution = sevenSegment.findDistribution(sevenSegment.cleanInputKeys[1]);
-        //HashMap<String, String> sleutel = new HashMap<String, String>(); //de cijfers die we al weten. We moeten eigenlijk alleen de 4 weten om de rest te beredeneren.
+        HashMap<Character, Character> sleutel = new HashMap<Character, Character>(); //de cijfers die we al weten. We moeten eigenlijk alleen de 4 weten om de rest te beredeneren.
+        sevenSegment.findEncodedFour(sevenSegment.cleanInputKeys);
+
+
+
         //for (int n = 0; n < sevenSegment.cleanInputCodes.length; n++) {
         //    if (distribution[n].equals("ABCEFG")) {
         //        sleutel.put("0");
         //    }
         //}
-
-        HashMap<Integer, String> findEasy = new HashMap<Integer, String>();
-        findEasy.put(6, "B");
-        findEasy.put(4, "E");
-        findEasy.put(9, "F");
-
-        //HashMap<Integer, String> findDifficult = new HashMap<Integer, String>();
-        //for (int q = 0; q < 7; q++) {
-        //    if (distribution[q] == 7) {
-        //        if () {
-        //            findDifficult.put(7, "D");
-        //        } else findDifficult.put(7, "G");
-        //    }
-        //    if (distribution[q] == 8) {
-        //        if () {
-        //            findDifficult.put(8, "C");
-        //        } else findDifficult.put(8, "G");
-        //    }
-        //}
-
-
-        for (int x = 0; x < distribution.length; x++) {
-
-            System.out.println(findEasy.get(distribution[x]));
-        }
-
-
-//ik maak een distribution
-        //voor elke lijn in de distribution zet ik er de corresponderende hoofdletter bij
-        //kleine letters: 0=a, 1=b enz.
-        //6, 4 en 9 zijn B, E, F.
-        //
-
-
     }
 
     String[] rawInput = {"be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb", "fdgacbe cefdb cefbgd gcbe",
@@ -137,7 +108,50 @@ public class SevenSegment2 {
         return distribution;
     }
 
+    public String findEncodedFour(String[] inputKeys) {
 
+        for (int i = 0; i < inputKeys.length; i++) {
+            if (inputKeys[i].length() == 4) {
+                return inputKeys[i];
+            }
+        }
+        return null;
+    }
+
+    public void findEasySegments(int[] distribution, HashMap<Character, Character> sleutel) {
+        for (int j = 0; j < distribution.length; j++) {
+            if (distribution[j] == 6) {
+                sleutel.put((char) (j + 97), 'B');
+            }
+            if (distribution[j] == 4) {
+                sleutel.put((char) (j + 97), 'E');
+            }
+            if (distribution[j] == 9) {
+                sleutel.put((char) (j + 97), 'F');
+
+            }
+        }
+    }
+
+    public void findHardSegments(int[] distribution, HashMap<Character, Character> sleutel, String encodedFour) {
+        for (int k = 0; k < distribution.length; k++) {
+            if (distribution[k] == 7) {
+                if (encodedFour.indexOf((char) (k + 97)) >= 0) {
+                    sleutel.put((char) (k + 97), 'D');
+                } else {
+                    sleutel.put((char) (k + 97), 'G');
+                }
+            }
+            if (distribution[k] == 8){
+                if (encodedFour.indexOf((char) (k + 97)) >= 0) {
+                    sleutel.put((char) (k + 97), 'C');
+                } else {
+                    sleutel.put((char) (k + 97), 'A');
+                }
+
+            }
+        }
+    }
 }
 
 //

@@ -175,8 +175,7 @@ public class Smoke1 {
         }
     }
 
-    public void controleerRandLinks(int[][] heightMap) { //hier ws een fout
-
+    public void controleerRandLinks(int[][] heightMap) {
         for (int i = 1; i < laatsteRij; i++) {
             int a = heightMap[i - 1][0];
             int c = heightMap[i][1];
