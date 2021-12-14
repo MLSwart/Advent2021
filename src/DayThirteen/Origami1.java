@@ -8,17 +8,13 @@ public class Origami1 {
         OriInput oriInput = new OriInput();
         origami.generateBlankMap(oriInput.inputRaw);
         int[][] map = origami.populateMapArray(oriInput.inputRaw, origami.generateBlankMap(oriInput.inputRaw));
-        origami.horizontalFold(map, oriInput.foldlinesY);
-        origami.verticalFold(map, oriInput.foldlinesX);
-        /*for (int m = 0; m < 6; m++) {
-            origami.verticalFold(map, oriInput.foldlinesX);
-            origami.horizontalFold(map, oriInput.foldlinesY);
+        for (int m = 0; m < 5; m++) {
+            origami.verticalFold(map, oriInput.foldlinesX[m]);
+            origami.horizontalFold(map, oriInput.foldlinesY[m]);
         }
-        for (int n = 0; n < 3; n++) {
-            origami.horizontalFold(map, oriInput.foldlinesY);
+        for (int n = 0; n < 2; n++) {
+            origami.horizontalFold(map, oriInput.foldlinesY[n + 5]);
         }
-
-         */
 
         origami.printMap(origami.generateTruncatedMapArray(map));
     }
@@ -65,9 +61,8 @@ public class Origami1 {
         }
     }
 
-    public void horizontalFold(int[][] mapArray, int[] foldlineY) { //vouw op y-as
-        int y = 0;
-        int foldline = foldlineY[y];
+    public void horizontalFold(int[][] mapArray, int foldline) { //vouw op y-as
+
         for (int i = foldline; i < mapArray.length; i++) {              //we gaan de rijen af
             int diff = Math.abs(foldline - i);                          //we bepalen het verschil tussen de y van de vouwlijn en de rijen eronder
             for (int j = 0; j < mapArray[i].length; j++) {              //we gaan de kolommen in de geselecteerde rij af
@@ -79,13 +74,10 @@ public class Origami1 {
             }
 
         }
-        y++;
 
     }
 
-    public void verticalFold(int[][] mapArray, int[] foldlineX) { //vouw op x-as
-        int x = 0;
-        int foldline = foldlineX[x];
+    public void verticalFold(int[][] mapArray, int foldline) { //vouw op x-as
         for (int i = foldline; i < mapArray[0].length; i++) {              //we gaan de kolommen af
             int diff = Math.abs(foldline - i);                          //we bepalen het verschil tussen de x van de vouwlijn en de kolommen rechts ervan
             for (int j = 0; j < mapArray.length; j++) {              //we gaan de rijen in de geselecteerde kolom af
@@ -97,8 +89,6 @@ public class Origami1 {
             }
 
         }
-        x++;
-
     }
 
     public int counter(int[][] map) {
@@ -113,11 +103,11 @@ public class Origami1 {
         return teller;
     }
 
-    public int[][] generateTruncatedMapArray(int[][] map){
-        int[][] truncatedMap=new int[7][7];
-        for(int i=0; i<truncatedMap.length;i++){
-            for (int j=0; j<truncatedMap[0].length;j++){
-                truncatedMap[i][j]=map[i][j];
+    public int[][] generateTruncatedMapArray(int[][] map) {
+        int[][] truncatedMap = new int[6][40];
+        for (int i = 0; i < truncatedMap.length; i++) {
+            for (int j = 0; j < truncatedMap[0].length; j++) {
+                truncatedMap[i][j] = map[i][j];
             }
 
         }
