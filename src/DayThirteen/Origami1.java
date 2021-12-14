@@ -6,18 +6,27 @@ public class Origami1 {
     public static void main(String[] args) {
         Origami1 origami = new Origami1();
         OriInput oriInput = new OriInput();
-        origami.findMax(oriInput.inputRaw);
-        //origami.generateMapArray(oriInput.inputRaw, origami.findMax(oriInput.inputRaw));
-        origami.horizontalFold(origami.generateMapArray(oriInput.inputRaw, origami.findMax(oriInput.inputRaw)));
+        origami.generateBlankMap(oriInput.inputRaw);
+        int[][] map = origami.populateMapArray(oriInput.inputRaw, origami.generateBlankMap(oriInput.inputRaw));
+        origami.horizontalFold(map, oriInput.foldlinesY);
+        origami.verticalFold(map, oriInput.foldlinesX);
+        /*for (int m = 0; m < 6; m++) {
+            origami.verticalFold(map, oriInput.foldlinesX);
+            origami.horizontalFold(map, oriInput.foldlinesY);
+        }
+        for (int n = 0; n < 3; n++) {
+            origami.horizontalFold(map, oriInput.foldlinesY);
+        }
 
+         */
+        origami.printMap(map);
     }
 
     int maximumX = 0;
     int maximumY = 0;
 
+    public int[][] generateBlankMap(int[] inputRaw) {
 
-    public int[][] findMax(int[] inputRaw) {
-        int[][] mapArray = new int[maximumX + 1][maximumY + 1];
         for (int i = 0; i < inputRaw.length; i = i + 2) {
             if (inputRaw[i] > maximumY) {
                 maximumY = inputRaw[i];
@@ -30,12 +39,13 @@ public class Origami1 {
             }
 
         }
+        int[][] mapArray = new int[maximumX + 1][maximumY + 1];
         return mapArray;
 
     }
 
 
-    public int[][] generateMapArray(int[] inputRaw, int[][] mapArray) {
+    public int[][] populateMapArray(int[] inputRaw, int[][] mapArray) {
         for (int i = 0; i < inputRaw.length - 1; i = i + 2) { //length= aantal rijen (?)
             int x = inputRaw[i + 1];
             int y = inputRaw[i];
@@ -47,27 +57,59 @@ public class Origami1 {
 
     }
 
+
     public void printMap(int[][] mapArray) {
         for (int[] ints : mapArray) {
             System.out.println(Arrays.toString(ints));
         }
     }
 
-    public void horizontalFold(int[][] mapArray) { //vouw op y-as
-        int foldline = 7;
+    public void horizontalFold(int[][] mapArray, int[] foldlineY) { //vouw op y-as
+        int y = 0;
+        int foldline = foldlineY[y];
         for (int i = foldline; i < mapArray.length; i++) {              //we gaan de rijen af
             int diff = Math.abs(foldline - i);                          //we bepalen het verschil tussen de y van de vouwlijn en de rijen eronder
             for (int j = 0; j < mapArray[i].length; j++) {              //we gaan de kolommen in de geselecteerde rij af
                 if (mapArray[i][j] > 0) {                               //staat er een stip? Dan...
-                    mapArray[i - diff][j] = mapArray[foldline-i][j];    //verplaatsen we de stip naar vouwlijn minus verschil
+                    mapArray[foldline - diff][j] = mapArray[i][j];    //verplaatsen we de stip naar vouwlijn minus verschil
                     mapArray[i][j] = 0;                                 //en maken de vakjes onder de vouwlijn nul.
                 }
 
             }
 
         }
-        printMap(mapArray);
+        y++;
 
+    }
+
+    public void verticalFold(int[][] mapArray, int[] foldlineX) { //vouw op x-as
+        int x = 0;
+        int foldline = foldlineX[x];
+        for (int i = foldline; i < mapArray[0].length; i++) {              //we gaan de kolommen af
+            int diff = Math.abs(foldline - i);                          //we bepalen het verschil tussen de x van de vouwlijn en de kolommen rechts ervan
+            for (int j = 0; j < mapArray.length; j++) {              //we gaan de rijen in de geselecteerde kolom af
+                if (mapArray[j][i] > 0) {                               //staat er een stip? Dan...
+                    mapArray[j][foldline - diff] = mapArray[j][i];    //verplaatsen we de stip naar vouwlijn minus verschil
+                    mapArray[j][i] = 0;                                 //en maken de vakjes rechts van de vouwlijn nul.
+                }
+
+            }
+
+        }
+        x++;
+
+    }
+
+    public int counter(int[][] map) {
+        int teller = 0;
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                if (map[i][j] > 0) {
+                    teller++;
+                }
+            }
+        }
+        return teller;
     }
 }
 
