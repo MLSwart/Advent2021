@@ -1,23 +1,23 @@
 package DayThirteen;
 
+import java.util.Arrays;
+
 public class Origami1 {
     public static void main(String[] args) {
         Origami1 origami = new Origami1();
-        OriInput oriInput= new OriInput();
+        OriInput oriInput = new OriInput();
         origami.findMax(oriInput.inputRaw);
-        System.out.println(origami.maximumY);
-        System.out.println(origami.maximumX);
-        origami.generateMapArray(oriInput.inputRaw, origami.findMax(oriInput.inputRaw));
-
-
+        //origami.generateMapArray(oriInput.inputRaw, origami.findMax(oriInput.inputRaw));
+        origami.horizontalFold(origami.generateMapArray(oriInput.inputRaw, origami.findMax(oriInput.inputRaw)));
 
     }
 
     int maximumX = 0;
     int maximumY = 0;
 
+
     public int[][] findMax(int[] inputRaw) {
-        int[][] mapArray = new int[maximumX+1][maximumY+1];
+        int[][] mapArray = new int[maximumX + 1][maximumY + 1];
         for (int i = 0; i < inputRaw.length; i = i + 2) {
             if (inputRaw[i] > maximumY) {
                 maximumY = inputRaw[i];
@@ -35,13 +35,38 @@ public class Origami1 {
     }
 
 
-    public void generateMapArray(int[] inputRaw, int[][] mapArray) {
-        for (int i = 0; i< inputRaw.length-1; i=i+2) { //length= aantal rijen (?)
-            int x=inputRaw[i+1];
-            int y=inputRaw[i];
-            mapArray[x][y]=mapArray[x][y]+1;
+    public int[][] generateMapArray(int[] inputRaw, int[][] mapArray) {
+        for (int i = 0; i < inputRaw.length - 1; i = i + 2) { //length= aantal rijen (?)
+            int x = inputRaw[i + 1];
+            int y = inputRaw[i];
+            mapArray[x][y] = mapArray[x][y] + 1;
 
         }
+
+        return mapArray;
+
+    }
+
+    public void printMap(int[][] mapArray) {
+        for (int[] ints : mapArray) {
+            System.out.println(Arrays.toString(ints));
+        }
+    }
+
+    public void horizontalFold(int[][] mapArray) { //vouw op y-as
+        int foldline = 7;
+        for (int i = foldline; i < mapArray.length; i++) {              //we gaan de rijen af
+            int diff = Math.abs(foldline - i);                          //we bepalen het verschil tussen de y van de vouwlijn en de rijen eronder
+            for (int j = 0; j < mapArray[i].length; j++) {              //we gaan de kolommen in de geselecteerde rij af
+                if (mapArray[i][j] > 0) {                               //staat er een stip? Dan...
+                    mapArray[i - diff][j] = mapArray[foldline-i][j];    //verplaatsen we de stip naar vouwlijn minus verschil
+                    mapArray[i][j] = 0;                                 //en maken de vakjes onder de vouwlijn nul.
+                }
+
+            }
+
+        }
+        printMap(mapArray);
 
     }
 }
@@ -59,6 +84,7 @@ Plan van aanpak:
 
 -We willen een functie die een y-as (horizontale) vouw simuleert.
     -Waarden die op de 1e rij onder de vouw zitten, komen op de 1e rij boven de vouw. Dus rij vouw+1 => vouw-1.
+    -Waarden onder de vouw worden 0/idealiter wordt het array 'afgeknipt' onder de vouw
 -We willen een functie die een x-as (verticale) vouw simuleert.
     -Waarden die op de 1e kolom rechts van de vouw zitten, komen op de 1e rij links van de vouw. Dus kolom vouw+1 => vouw-1.
 

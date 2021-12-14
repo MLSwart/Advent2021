@@ -21,4 +21,18 @@ public class OriInput {
             8, 10,
             9, 0};
 
+    //String //hier komen de instructies
+
 }
+
+/*
+
+vouw op zeven:
+
+8 wordt 6 (verschil met 7: 1)
+9 wordt 5 (verschil met 7: 2)
+10 wordt 4 (verschil met 7: 3)
+
+Dus verschil blijft hetzelfde maar (+ verschil) wordt (- verschil)
+
+ */
