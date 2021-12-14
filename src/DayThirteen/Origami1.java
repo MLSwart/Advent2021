@@ -19,7 +19,8 @@ public class Origami1 {
         }
 
          */
-        origami.printMap(map);
+
+        origami.printMap(origami.generateTruncatedMapArray(map));
     }
 
     int maximumX = 0;
@@ -110,6 +111,18 @@ public class Origami1 {
             }
         }
         return teller;
+    }
+
+    public int[][] generateTruncatedMapArray(int[][] map){
+        int[][] truncatedMap=new int[7][7];
+        for(int i=0; i<truncatedMap.length;i++){
+            for (int j=0; j<truncatedMap[0].length;j++){
+                truncatedMap[i][j]=map[i][j];
+            }
+
+        }
+        return truncatedMap;
+
     }
 }
 
