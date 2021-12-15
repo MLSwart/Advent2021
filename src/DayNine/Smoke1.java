@@ -6,13 +6,9 @@ import java.util.List;
 public class Smoke1 {
     public static void main(String[] args) {
         Smoke1 smoke = new Smoke1();
+        smoke.check();
 
-        smoke.controleerMidden(smoke.heightMap);
-        smoke.controleerRandBoven(smoke.heightMap);
-        smoke.controleerRandOnder(smoke.heightMap);
-        smoke.controleerRandLinks(smoke.heightMap);
-        smoke.controleerRandRechts(smoke.heightMap);
-        smoke.controleerHoeken(smoke.heightMap);
+        System.out.println(smoke.lowPointValues.size());
 
         int uitkomst = smoke.lowPointValues.size();
         for (int u = 0; u < smoke.lowPointValues.size(); u++) {
@@ -22,6 +18,15 @@ public class Smoke1 {
         System.out.println(uitkomst);
 
 
+    }
+
+    public void check() {
+        controleerMidden(heightMap);
+        controleerRandBoven(heightMap);
+        controleerRandOnder(heightMap);
+        controleerRandLinks(heightMap);
+        controleerRandRechts(heightMap);
+        controleerHoeken(heightMap);
     }
 
     int[][] heightMap = {{7,6,7,8,9,2,1,2,3,4,9,8,8,6,7,8,9,0,1,2,3,8,9,5,4,3,2,3,4,9,8,7,6,5,4,3,2,1,2,5,7,8,9,9,9,9,5,6,7,8,9,8,7,6,5,4,5,4,2,2,3,7,8,9,9,8,9,8,6,5,4,3,2,1,2,4,5,6,9,8,9,9,8,9,4,3,2,5,6,7,8,9,8,9,2,1,2,9,6,5},
@@ -123,13 +128,15 @@ public class Smoke1 {
             {4,5,6,8,9,9,9,9,8,9,8,8,9,9,8,7,9,9,6,5,5,4,7,7,9,8,7,9,8,6,5,4,3,2,1,2,3,8,9,8,7,6,7,8,9,2,1,9,8,7,5,4,3,6,5,6,9,9,9,8,7,5,4,5,9,7,6,5,4,3,2,3,4,5,7,9,9,8,7,8,9,9,9,5,4,3,4,5,6,9,9,8,4,3,2,3,2,3,4,5},
             {5,6,7,9,9,8,7,6,9,1,9,9,8,9,9,8,9,6,5,4,4,3,4,5,6,9,8,9,9,7,6,3,2,1,0,3,4,9,9,9,8,7,8,9,4,3,5,9,8,7,6,7,8,9,6,7,8,9,8,7,6,5,2,9,8,6,5,4,3,2,1,2,3,6,8,9,2,9,8,9,8,9,8,7,5,6,7,7,8,9,9,8,5,4,3,4,5,4,5,6},
             {6,7,8,9,9,9,6,5,3,2,4,6,7,8,9,9,6,5,4,3,2,1,2,6,9,8,9,0,1,9,5,4,3,2,1,4,6,8,9,0,9,8,9,6,5,9,6,7,9,8,8,9,9,1,9,8,9,9,9,6,5,4,1,9,8,7,6,5,4,3,2,5,4,5,9,0,1,2,9,6,7,8,9,8,6,7,8,9,9,9,8,7,6,7,9,5,7,6,8,7},
-            {7,9,9,9,9,8,6,5,4,3,4,5,6,7,9,8,7,6,7,5,3,2,3,4,5,7,8,9,9,8,7,5,4,3,2,5,6,9,3,2,3,9,9,7,6,7,8,9,9,9,9,5,3,2,3,9,9,9,8,7,6,2,0,1,9,9,8,7,5,4,3,6,5,7,8,9,2,3,4,5,6,7,8,9,7,8,9,0,1,2,9,8,7,8,9,6,8,7,9,8,}};
+            {7,9,9,9,9,8,6,5,4,3,4,5,6,7,9,8,7,6,7,5,3,2,3,4,5,7,8,9,9,8,7,5,4,3,2,5,6,9,3,2,3,9,9,7,6,7,8,9,9,9,9,5,3,2,3,9,9,9,8,7,6,2,0,1,9,9,8,7,5,4,3,6,5,7,8,9,2,3,4,5,6,7,8,9,7,8,9,0,1,2,9,8,7,8,9,6,8,7,9,8,}
+    };
 
     int laatsteRij = heightMap.length - 1;
     int laatsteKolom = heightMap[0].length - 1;
 
 
     List<Integer> lowPointValues = new ArrayList<>();
+    List<Integer> lowPointCoords = new ArrayList<>();
 
 
     public void controleerMidden(int[][] heightMap) {
@@ -141,6 +148,8 @@ public class Smoke1 {
                 int d = heightMap[i + 1][j];
                 if (heightMap[i][j] < a && heightMap[i][j] < b && heightMap[i][j] < c && heightMap[i][j] < d) {
                     lowPointValues.add(heightMap[i][j]);
+                    lowPointCoords.add(i);
+                    lowPointCoords.add(j);
                 }
 
             }
@@ -157,6 +166,8 @@ public class Smoke1 {
             int d = heightMap[0 + 1][j];
             if (heightMap[0][j] < b && heightMap[0][j] < c && heightMap[0][j] < d) {
                 lowPointValues.add(heightMap[0][j]);
+                lowPointCoords.add(0);
+                lowPointCoords.add(j);
             }
 
         }
@@ -170,6 +181,8 @@ public class Smoke1 {
             int c = heightMap[heightMap.length - 1][j + 1];
             if (heightMap[heightMap.length - 1][j] < a && heightMap[heightMap.length - 1][j] < b && heightMap[heightMap.length - 1][j] < c) {
                 lowPointValues.add(heightMap[heightMap.length - 1][j]);
+                lowPointCoords.add(heightMap.length - 1);
+                lowPointCoords.add(j);
             }
 
         }
@@ -183,6 +196,8 @@ public class Smoke1 {
 
             if (heightMap[i][0] < a && heightMap[i][0] < c && heightMap[i][0] < d) {
                 lowPointValues.add(heightMap[i][0]);
+                lowPointCoords.add(i);
+                lowPointCoords.add(0);
             }
 
         }
@@ -197,6 +212,8 @@ public class Smoke1 {
 
             if (heightMap[i][laatsteKolom] < a && heightMap[i][laatsteKolom] < b && heightMap[i][laatsteKolom] < d) {
                 lowPointValues.add(heightMap[i][laatsteKolom]);
+                lowPointCoords.add(i);
+                lowPointCoords.add(laatsteKolom);
             }
 
         }
@@ -205,15 +222,23 @@ public class Smoke1 {
     public void controleerHoeken(int[][] heightMap) {
         if (heightMap[0][0] < heightMap[1][0] && heightMap[0][0] < heightMap[0][1]) { //linksboven
             lowPointValues.add(heightMap[0][0]);
+            lowPointCoords.add(0);
+            lowPointCoords.add(0);
         }
         if (heightMap[0][laatsteKolom] < heightMap[1][laatsteKolom] && heightMap[0][laatsteKolom] < heightMap[0][laatsteKolom - 1]) { //rechtsboven
             lowPointValues.add(heightMap[0][laatsteKolom]);
+            lowPointCoords.add(0);
+            lowPointCoords.add(laatsteKolom);
         }
         if (heightMap[laatsteRij][0] < heightMap[laatsteRij][1] && heightMap[laatsteRij][0] < heightMap[laatsteRij - 1][0]) { //linksonder
             lowPointValues.add(heightMap[laatsteRij][0]);
+            lowPointCoords.add(laatsteRij);
+            lowPointCoords.add(0);
         }
         if (heightMap[laatsteRij][laatsteKolom] < heightMap[laatsteRij - 1][laatsteKolom] && heightMap[laatsteRij][laatsteKolom] < heightMap[laatsteRij][laatsteKolom - 1]) {
             lowPointValues.add(heightMap[laatsteRij][laatsteKolom]);
+            lowPointCoords.add(laatsteRij);
+            lowPointCoords.add(laatsteKolom);
         }
     }
 }
