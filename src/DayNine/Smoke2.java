@@ -8,31 +8,16 @@ public class Smoke2 {
     public static void main(String[] args) {
         Smoke2 smoke = new Smoke2();
         Smoke1 smoke1 = new Smoke1();
-        smoke1.check();
-    //    smoke.makeCoordsArray();
-        System.out.println(smoke1.lowPointCoords);
 
+        //    smoke.makeCoordsArray();
 
+        for (int m = 0; m < smoke1.lowPointCoordArray.length; m++) {
+            System.out.println(smoke1.lowPointCoordArray[m][0] + "," + smoke1.lowPointCoordArray[m][1]);
+        }
 
     }
 
     Smoke1 smoke1b = new Smoke1();
-    int[][] coordsArray = new int[(smoke1b.lowPointCoords.size()) / 2][2];
-    String placeholder = "placeholder";
-
-    /*public int[][] makeCoordsArray() { //todo
-        int a = 0;
-        int b = 0;
-        for (int i = 0; i < smoke1b.lowPointCoords.size(); i = i + 2) {
-            coordsArray[i][0] = smoke1b.lowPointCoords.get(a);
-            coordsArray[i][1] = smoke1b.lowPointCoords.get(a + 1);
-            a = a + 2;
-
-        }
-        return coordsArray;
-    }
-
-     */
 
 }
 
@@ -49,6 +34,8 @@ Doe dit voor alle laagtepunten.
 Bepaal welke drie series het grootst zijn
 Vermenigvuldig de grootte van de drie grootste series.
 => antwoord.
+
+In de puzzle input zijn 226 basins te vinden.
 
 
  */
