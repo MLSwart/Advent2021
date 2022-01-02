@@ -1,25 +1,59 @@
 package DayNine;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Smoke2 {
+
     public static void main(String[] args) {
+        Smoke1 smokeNew = new Smoke1();
         Smoke2 smoke = new Smoke2();
-        Smoke1 smoke1 = new Smoke1();
+        smoke.printCoordsArray();
+        for(int lowPointNum =0; lowPointNum<smokeNew.lowPointCoordArray.length; lowPointNum++){
+            smoke.checkBasinSize(smokeNew.lowPointCoordArray, smokeNew.heightMap, lowPointNum);
+        }
 
-        //    smoke.makeCoordsArray();
 
-        for (int m = 0; m < smoke1.lowPointCoordArray.length; m++) {
-            System.out.println(smoke1.lowPointCoordArray[m][0] + "," + smoke1.lowPointCoordArray[m][1]);
+    }
+    Smoke1 smoke1 = new Smoke1();
+
+
+
+    public void printCoordsArray() {
+        for (int lowPointNum = 0; lowPointNum < smoke1.lowPointCoordArray.length; lowPointNum++) {
+            System.out.println(smoke1.lowPointCoordArray[lowPointNum][0] + "," + smoke1.lowPointCoordArray[lowPointNum][1]);
         }
 
     }
 
-    Smoke1 smoke1b = new Smoke1();
+    public void checkBasinSize(int[][] lowPointCoordArray, int[][] heightMap, int lowPointNum) {
+        List<int[]> checked = new ArrayList<int[]>();
+        int xCoord = smoke1.lowPointCoordArray[lowPointNum][0];
+        int yCoord = smoke1.lowPointCoordArray[lowPointNum][1];
+        checked.add(heightMap[lowPointNum]);
+        boolean negenGevonden=false;
+        while(!negenGevonden){
+            xCoord--;
+        if (heightMap[xCoord][yCoord]!=9||xCoord>=0||!checked.contains(heightMap[lowPointNum])){ //links kijken
+            checked.add(heightMap[lowPointNum]);
+        }
+        else negenGevonden=true;
+
+    }
+        System.out.print(checked);
 
 }
+
+//check links
+//check rechts
+//check rij omhoog
+//check rij omlaag
+
+
+
+}
+
+
 
 /*
 Plan van aanpak:
