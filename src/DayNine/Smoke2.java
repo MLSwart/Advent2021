@@ -1,57 +1,90 @@
 package DayNine;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Smoke2 {
 
     public static void main(String[] args) {
         Smoke1 smokeNew = new Smoke1();
         Smoke2 smoke = new Smoke2();
-        smoke.printCoordsArray();
-        for(int lowPointNum =0; lowPointNum<smokeNew.lowPointCoordArray.length; lowPointNum++){
-            smoke.checkBasinSize(smokeNew.lowPointCoordArray, smokeNew.heightMap, lowPointNum);
-        }
+        smoke.printLowPointCoordsToHash();
+        System.out.println(smoke.lowPoints);
+        smoke.checkBasinSize(smokeNew.lowPointCoordArray, smokeNew.heightMap);
 
 
     }
+
     Smoke1 smoke1 = new Smoke1();
+    Set<Point> lowPoints = new HashSet<>();
+    Set<Point> seenPoints = new HashSet<>();
+    Set<Integer> basinSizes = new HashSet<Integer>();
 
 
-
-    public void printCoordsArray() {
+    public void printLowPointCoordsToHash() {
         for (int lowPointNum = 0; lowPointNum < smoke1.lowPointCoordArray.length; lowPointNum++) {
-            System.out.println(smoke1.lowPointCoordArray[lowPointNum][0] + "," + smoke1.lowPointCoordArray[lowPointNum][1]);
+            lowPoints.add(new Point(smoke1.lowPointCoordArray[lowPointNum][0], smoke1.lowPointCoordArray[lowPointNum][1]));
+        }
+    }
+
+    public void checkBasinSize(int[][] lowPointCoordArray, int[][] heightMap) { //todo
+        Iterator<Point> i = lowPoints.iterator();
+        while (i.hasNext()) {
+            seenPoints.removeAll(seenPoints);
+            int m = 1;
+            Point point = i.next();
+            seenPoints.add(point);
+            Set<Point> seenThisIteration = new HashSet<>();
+            Iterator<Point> j = seenThisIteration.iterator();
+            boolean done = false;
+            if (j.hasNext()) {
+                done = false;
+                point =j.next();
+            }
+            while (!done) {
+                if ((point.x()) - m >= 0 && heightMap[point.y()][(point.x()) - m] != 9 && !seenPoints.contains(new Point((point.x()) - m, point.y()))) {
+                    seenThisIteration.add(new Point((point.x()) - m, point.y()));
+                    seenPoints.add(new Point((point.x()) - m, point.y()));
+
+                }
+                if ((point.x()) + m < smoke1.laatsteKolom && heightMap[(point.y())][point.x() + m] != 9 && !seenPoints.contains(new Point((point.x()) + m, point.y()))) {
+                    seenThisIteration.add(new Point((point.x()) + m, point.y()));
+                    seenPoints.add(new Point((point.x()) + m, point.y()));
+
+                }
+                if ((point.y()) - m >= 0 && heightMap[point.y() - m][(point.x())] != 9 && seenPoints.contains(new Point((point.x()), point.y() - m))) {
+                    seenThisIteration.add(new Point((point.x()), point.y() - m));
+                    seenPoints.add(new Point((point.x()), point.y() - m));
+
+                }
+                if ((point.y()) + m < smoke1.laatsteRij && heightMap[point.y() + m][(point.x())] != 9 && seenPoints.contains(new Point((point.x()) - m, point.y() + m))) {
+                    seenThisIteration.add(new Point((point.x()) - m, point.y() + m));
+                    seenPoints.add(new Point((point.x()) - m, point.y() + m));
+
+                }
+
+
+                if (seenThisIteration.size() == 0) {
+                    done = true;
+                    System.out.println(seenPoints.size());
+                }
+                seenThisIteration.removeAll(seenThisIteration);
+
+            }
+
         }
 
     }
 
-    public void checkBasinSize(int[][] lowPointCoordArray, int[][] heightMap, int lowPointNum) {
-        List<int[]> checked = new ArrayList<int[]>();
-        int xCoord = smoke1.lowPointCoordArray[lowPointNum][0];
-        int yCoord = smoke1.lowPointCoordArray[lowPointNum][1];
-        checked.add(heightMap[lowPointNum]);
-        boolean negenGevonden=false;
-        while(!negenGevonden){
-            xCoord--;
-        if (heightMap[xCoord][yCoord]!=9||xCoord>=0||!checked.contains(heightMap[lowPointNum])){ //links kijken
-            checked.add(heightMap[lowPointNum]);
-        }
-        else negenGevonden=true;
-
-    }
-        System.out.print(checked);
 
 }
 
-//check links
+
 //check rechts
 //check rij omhoog
 //check rij omlaag
 
 
 
-}
 
 
 

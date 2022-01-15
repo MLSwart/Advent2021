@@ -45,13 +45,13 @@ public class Smoke1 {
     List<Integer> lowPointCoords = new ArrayList<>();
     int[][] lowPointCoordArray;
 
-    {
+    public Smoke1() {
         check();
         lowPointCoordArray = new int[lowPointCoords.size() / 2][2];
         int a = 0;
         for (int i = 0; i < lowPointCoords.size() / 2; i++) {
-            lowPointCoordArray[i][0] = lowPointCoords.get(a);
-            lowPointCoordArray[i][1] = lowPointCoords.get(a + 1);
+            lowPointCoordArray[i][1] = lowPointCoords.get(a);
+            lowPointCoordArray[i][0] = lowPointCoords.get(a + 1);
             a = a + 2;
 
         }
