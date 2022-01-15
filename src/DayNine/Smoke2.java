@@ -27,10 +27,9 @@ public class Smoke2 {
     }
 
     public void checkBasinSize(int[][] lowPointCoordArray, int[][] heightMap) { //todo
-        for (Point lowPoint : lowPoints) {
+        for (Point point : lowPoints) {
             seenPoints.clear();
             int m = 1;
-            Point point = lowPoint;
             seenPoints.add(point);
             Set<Point> seenThisIteration = new HashSet<>();
             Iterator<Point> j = seenThisIteration.iterator();
