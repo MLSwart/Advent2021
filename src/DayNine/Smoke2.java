@@ -27,18 +27,17 @@ public class Smoke2 {
     }
 
     public void checkBasinSize(int[][] lowPointCoordArray, int[][] heightMap) { //todo
-        Iterator<Point> i = lowPoints.iterator();
-        while (i.hasNext()) {
-            seenPoints.removeAll(seenPoints);
+        for (Point lowPoint : lowPoints) {
+            seenPoints.clear();
             int m = 1;
-            Point point = i.next();
+            Point point = lowPoint;
             seenPoints.add(point);
             Set<Point> seenThisIteration = new HashSet<>();
             Iterator<Point> j = seenThisIteration.iterator();
             boolean done = false;
             if (j.hasNext()) {
                 done = false;
-                point =j.next();
+                point = j.next();
             }
             while (!done) {
                 if ((point.x()) - m >= 0 && heightMap[point.y()][(point.x()) - m] != 9 && !seenPoints.contains(new Point((point.x()) - m, point.y()))) {
@@ -67,7 +66,7 @@ public class Smoke2 {
                     done = true;
                     System.out.println(seenPoints.size());
                 }
-                seenThisIteration.removeAll(seenThisIteration);
+                seenThisIteration.clear();
 
             }
 
